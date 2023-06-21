@@ -75,14 +75,9 @@ defmodule Mix.Tasks.GitOps.ProjectInfo do
 
   defp format_github_actions(project, _opts) do
     {name, version} = extract_name_and_version_from_project(project)
-    env = System.get_env("GITHUB_OUTPUT")
-    IO.inspect(env)
 
-    IO.write(
-      "\"app_name=#{name}\" >> $GITHUB_OUTPUT\n\"app_version=#{version}\" >> $GITHUB_OUTPUT\n"
-    )
-
-    System.put_env("GITHUB_OUTPUT", "#{env}\napp_name=#{name}\napp_version=#{version}")
+    System.get_env("GITHUB_OUTPUT")
+    |> File.write("app_name=#{name}\napp_version=#{version}", [:append])
   end
 
   defp format_shell(project, _opts) do

@@ -77,7 +77,7 @@ defmodule Mix.Tasks.GitOps.ProjectInfo do
     {name, version} = extract_name_and_version_from_project(project)
 
     IO.write(
-      "echo \"app_name=#{name}\" >> $GITHUB_OUTPUT\necho \"app_version=#{version}\" >> $GITHUB_OUTPUT\n"
+      "\"app_name=#{name}\" >> $GITHUB_OUTPUT\n\"app_version=#{version}\" >> $GITHUB_OUTPUT\n"
     )
   end
 
